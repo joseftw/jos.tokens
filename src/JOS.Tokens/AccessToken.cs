@@ -21,12 +21,13 @@ namespace JOS.Tokens
             Token = token;
             RefreshToken = refreshToken;
             ExpiresInSeconds = expiresInSeconds;
+            Expires = DateTime.UtcNow.AddSeconds(ExpiresInSeconds);
         }
 
         public string Token { get; }
         public string? RefreshToken { get; }
         public int ExpiresInSeconds { get; }
-        public DateTime Expires => DateTime.UtcNow.AddSeconds(ExpiresInSeconds);
+        public DateTime Expires { get; }
         public bool Expired => (Expires - DateTime.UtcNow).TotalSeconds <= Threshold.TotalSeconds;
     }
 }
