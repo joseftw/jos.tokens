@@ -65,15 +65,15 @@ namespace JOS.Tokens.HttpClients
 
         private async Task<AccessToken> FetchToken()
         {
-            await AccessTokenSemaphore.WaitAsync();
-
-            if (_accessToken is { Expired: false })
-            {
-                return _accessToken;
-            }
-
             try
             {
+                await AccessTokenSemaphore.WaitAsync();
+
+                if (_accessToken is { Expired: false })
+                {
+                    return _accessToken;
+                }
+         
                 var request = new HttpRequestMessage(HttpMethod.Post, "/connect/token/")
                 {
                     Content = new FormUrlEncodedContent(new KeyValuePair<string?, string?>[]
