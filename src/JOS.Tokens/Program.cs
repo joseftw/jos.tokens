@@ -62,6 +62,7 @@ namespace JOS.Tokens
                 });
 
             var host = builder.Build();
+            await host.RunAsync();
         }
 
         private static string GetEnvironment(IConfiguration configuration)

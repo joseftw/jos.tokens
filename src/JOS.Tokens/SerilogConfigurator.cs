@@ -57,7 +57,7 @@ namespace JOS.Tokens
 
         private IEnumerable<LoggingOverride> GetOverrides()
         {
-            return _configuration.GetSection("Logging:Level:Overrides").Get<LoggingOverride[]>();
+            return _configuration.GetSection("Logging:Level:Overrides").Get<LoggingOverride[]>()!;
         }
 
         private bool ShouldLogToConsole => _configuration.GetValue<bool?>("Logging:Output:Console:Enabled") ?? true;

@@ -24,8 +24,10 @@ namespace JOS.Tokens.HttpClients
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             var config = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            _clientId = config.GetValue<string>("CompanyApi:ClientId");
-            _clientSecret = config.GetValue<string>("CompanyApi:ClientSecret");
+            _clientId = config.GetValue<string>("CompanyApi:ClientId")!;
+            ArgumentException.ThrowIfNullOrEmpty(_clientId);
+            _clientSecret = config.GetValue<string>("CompanyApi:ClientSecret")!;
+            ArgumentException.ThrowIfNullOrEmpty(_clientSecret);
         }
 
         public async Task<AccessToken> GetAccessToken()
